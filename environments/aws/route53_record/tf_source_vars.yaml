@@ -1,0 +1,4 @@
+---
+tf_source: ../../../modules/aws//route53_record
+
+inputs:

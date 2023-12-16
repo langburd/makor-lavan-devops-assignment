@@ -1,0 +1,11 @@
+---
+common:
+  default_region: eu-central-1
+app_name: devops-assignment
+hosted_zone_name: mend.langburd.net
+tags:
+  Department: DevOps
+  GitRepository: https://github.com/langburd/makor-lavan-devops-assignment
+  Owner: Avi Langburd
+  Temp: true
+  Terraform: true

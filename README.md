@@ -51,8 +51,7 @@ docker push $REGISTRY:$VERSION
 ## Deploy all infrastructure and application resources
 
 ```shell
-cd environments
-terragrunt run-all apply
+terragrunt run-all apply --terragrunt-working-dir environments
 ```
 
 ## Deploy single resource

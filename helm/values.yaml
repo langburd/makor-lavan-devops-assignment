@@ -1,0 +1,59 @@
+---
+appEnvironment: development
+existingSecret: makor-lavan
+replicaCount: 1
+image:
+  repository: ghcr.io/langburd/makor-lavan-devops-assignment
+  pullPolicy: IfNotPresent
+  tag: ""
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+podAnnotations: {}
+podLabels: {}
+podSecurityContext: {}
+securityContext: {}
+service:
+  type: ClusterIP
+  port: 8080
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+resources:
+  limits:
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+volumes:
+  - name: index-html
+    configMap:
+      name: makor-lavan-index-html
+  - name: env-vars
+    configMap:
+      name: makor-lavan-env-vars
+volumeMounts:
+  - name: index-html
+    mountPath: /app/web/
+    readOnly: true
+nodeSelector: {}
+tolerations: []
+affinity: {}

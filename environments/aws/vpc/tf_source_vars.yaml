@@ -1,0 +1,16 @@
+---
+tf_source: ../../../modules/aws//vpc
+
+inputs:
+  vpc_name: avilangburd
+  vpc_cidr: 10.150.0.0/16
+  vpc_subnets_map:
+    public:
+      eks:
+        eks-public-1a:
+          cidr: 10.150.0.0/22
+        eks-public-1b:
+          cidr: 10.150.4.0/22
+  eks_cluster_name: avilangburd
+  tags:
+    Name: avilangburd
