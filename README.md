@@ -48,6 +48,19 @@ docker build --platform linux/amd64 -t $REGISTRY:$VERSION . && \
 docker push $REGISTRY:$VERSION
 ```
 
+## Authenticate to AWS
+
+```shell
+export AWS_PROFILE=mend && export KUBECONFIG=$(pwd)/kubeconfig.yaml
+```
+
+## Authenticate to Azure
+
+```shell
+az login
+az aks get-credentials --resource-group "avilangburd" --name "" --admin
+```
+
 ## Deploy all infrastructure and application resources
 
 ```shell
