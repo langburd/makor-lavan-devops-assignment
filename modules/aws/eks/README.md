@@ -59,4 +59,6 @@ No modules.
 |------|-------------|
 | <a name="output_add_kubeconfig"></a> [add\_kubeconfig](#output\_add\_kubeconfig) | Command to add the EKS cluster to your kubeconfig |
 | <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | Name of the EKS cluster |
+| <a name="output_oidc_provider"></a> [oidc\_provider](#output\_oidc\_provider) | The OpenID Connect identity provider (issuer URL without leading `https://`) |
+| <a name="output_oidc_provider_arn"></a> [oidc\_provider\_arn](#output\_oidc\_provider\_arn) | The ARN of the OIDC Provider if `enable_irsa = true` |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

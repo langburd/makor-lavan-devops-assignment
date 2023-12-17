@@ -7,16 +7,16 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.25.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.11.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.23.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~>2.12.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~>2.24.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.25.0 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.11.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.23.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | ~>2.12.1 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~>2.24.0 |
 
 ## Modules
 
@@ -26,12 +26,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.app](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [helm_release.ingress_nginx](https://registry.terraform.io/providers/hashicorp/helm/2.11.0/docs/resources/release) | resource |
-| [kubernetes_namespace.app](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/resources/namespace) | resource |
+| [helm_release.app](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_namespace.app](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [aws_eks_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster) | data source |
 | [aws_eks_cluster_auth.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth) | data source |
-| [kubernetes_service.ingress_nginx](https://registry.terraform.io/providers/hashicorp/kubernetes/2.23.0/docs/data-sources/service) | data source |
 
 ## Inputs
 
@@ -49,5 +47,4 @@ No modules.
 |------|-------------|
 | <a name="output_app_name"></a> [app\_name](#output\_app\_name) | The name of the app |
 | <a name="output_app_url"></a> [app\_url](#output\_app\_url) | The URL of the app |
-| <a name="output_ingress_nginx_elb_hostname"></a> [ingress\_nginx\_elb\_hostname](#output\_ingress\_nginx\_elb\_hostname) | The hostname of the ingress nginx ELB |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

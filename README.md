@@ -63,6 +63,6 @@ terragrunt apply --terragrunt-working-dir environments/<env>/<resource>
 ## Deploy application only
 
 ```shell
-terragrunt apply --terragrunt-working-dir environments/aws/helm
-terragrunt apply --terragrunt-working-dir environments/azure/helm
+terragrunt apply --terragrunt-working-dir environments/aws/app
+terragrunt apply --terragrunt-working-dir environments/azure/app
 ```

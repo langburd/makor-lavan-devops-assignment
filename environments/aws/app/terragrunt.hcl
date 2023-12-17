@@ -21,7 +21,8 @@ inputs = merge(
 dependencies {
   paths = [
     "../eks",
-    "../acm"
+    "../acm",
+    "../alb",
   ]
 }
 

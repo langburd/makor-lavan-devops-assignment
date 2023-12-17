@@ -10,12 +10,12 @@ terraform {
 
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.23.0"
+      version = "~>2.24.0"
     }
 
     helm = {
       source  = "hashicorp/helm"
-      version = "2.11.0"
+      version = "~>2.12.1"
     }
   }
 }
@@ -44,29 +44,6 @@ provider "helm" {
   }
 }
 
-# Nginx Ingress Controller
-resource "helm_release" "ingress_nginx" {
-  name          = "ingress-nginx"
-  repository    = "https://kubernetes.github.io/ingress-nginx"
-  namespace     = "kube-system"
-  chart         = "ingress-nginx"
-  version       = "4.8.3"
-  recreate_pods = true
-  values = [
-    templatefile("${path.module}/templates/ingress-nginx.tpl", {
-      certificate_arn = var.certificate_arn
-    })
-  ]
-}
-
-data "kubernetes_service" "ingress_nginx" {
-  metadata {
-    namespace = helm_release.ingress_nginx.namespace
-    name      = "${helm_release.ingress_nginx.name}-controller"
-  }
-  depends_on = [helm_release.ingress_nginx]
-}
-
 # Application
 resource "kubernetes_namespace" "app" {
   metadata {
@@ -83,6 +60,7 @@ resource "helm_release" "app" {
       app_environment = var.app_environment
       app_name        = var.app_name
       host_name       = "${var.app_name}.${var.hosted_zone_name}"
+      certificate_arn = var.certificate_arn
     })
   ]
   depends_on = [kubernetes_namespace.app]

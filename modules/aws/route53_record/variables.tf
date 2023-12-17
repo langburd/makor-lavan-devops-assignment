@@ -8,8 +8,3 @@ variable "app_name" {
   type        = string
   default     = "app"
 }
-
-variable "elb_dns_name" {
-  description = "The DNS name of the ELB"
-  type        = string
-}

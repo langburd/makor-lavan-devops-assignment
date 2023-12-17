@@ -11,7 +11,6 @@ inputs = merge(
   include.root.locals.resource_vars["inputs"],
   {
     app_name       = dependency.helm.outputs.app_name
-    elb_dns_name   = dependency.helm.outputs.ingress_nginx_elb_hostname
     hosted_zone_id = dependency.route53_zone.outputs.hosted_zone_id
   },
   {
@@ -24,7 +23,7 @@ inputs = merge(
 
 dependencies {
   paths = [
-    "../helm",
+    "../app",
     "../route53_zone",
   ]
 }
@@ -37,9 +36,8 @@ dependency "route53_zone" {
 }
 
 dependency "helm" {
-  config_path = "../helm"
+  config_path = "../app"
   mock_outputs = {
-    app_name                   = "makor-lavan"
-    ingress_nginx_elb_hostname = "makor-lavan-123456789.us-east-1.elb.amazonaws.com"
+    app_name = "makor-lavan"
   }
 }
