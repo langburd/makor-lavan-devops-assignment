@@ -62,11 +62,6 @@ repos:
         args:
           - >
             --args=--disable-rule=terraform_module_pinned_source
-      - id: terraform_tfsec
-        args:
-          - >
-            --args=--exclude-downloaded-modules
-            -e aws-eks-no-public-cluster-access,aws-eks-no-public-cluster-access-to-cidr,aws-eks-encrypt-secrets,aws-eks-enable-control-plane-logging,aws-ec2-require-vpc-flow-logs-for-all-vpcs
 
   # Python hooks
   - repo: https://github.com/psf/black

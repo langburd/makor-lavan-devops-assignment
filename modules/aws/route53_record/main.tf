@@ -15,7 +15,7 @@ data "aws_lb" "app" {
   name = var.app_name
 }
 
-# DNS record for application
+# DNS records for application
 resource "aws_route53_record" "app" {
   zone_id = var.hosted_zone_id
   name    = var.app_name
@@ -26,4 +26,12 @@ resource "aws_route53_record" "app" {
     zone_id                = data.aws_elb_hosted_zone_id.this.id
     evaluate_target_health = true
   }
+}
+
+resource "aws_route53_record" "azure" {
+  zone_id = var.hosted_zone_id
+  name    = "${var.app_name}-azure"
+  type    = "A"
+  ttl     = 300
+  records = [var.public_ip_address]
 }

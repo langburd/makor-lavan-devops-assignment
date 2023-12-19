@@ -23,9 +23,8 @@ service:
   port: 8080
 ingress:
   enabled: true
-  className: nginx
-  annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  className:
+  annotations: {}
   hosts:
     - host: chart-example.local
       paths:

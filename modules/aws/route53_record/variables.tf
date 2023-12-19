@@ -8,3 +8,8 @@ variable "app_name" {
   type        = string
   default     = "app"
 }
+
+variable "public_ip_address" {
+  description = "The public IP address of the Application Gateway"
+  type        = string
+}

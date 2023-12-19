@@ -4,7 +4,7 @@
 <title>Welcome to Mend DevOps Assignment Application!</title>
 <style>
 html { color-scheme: light dark; }
-body { width: 40em; margin: 0 auto;
+body { width: 60em; margin: 0 auto;
 font-family: Tahoma, Verdana, Arial, sans serif; }
 </style>
 </head>
@@ -15,6 +15,14 @@ font-family: Tahoma, Verdana, Arial, sans serif; }
 <p>Project repository:
 <a href="https://github.com/langburd/makor-lavan-devops-assignment">https://github.com/langburd/makor-lavan-devops-assignment</a>
 </p>
+
+<p>Application environment: "{{ app_environment }}"</p>
+
+<p>Application version: "{{ app_version }}"</p>
+
+<p>Application hostname: "{{ app_hostname }}"</p>
+
+<p>More information about the application: <a href={{ url_for("echo") }}>json</a></p>
 
 </body>
 </html>

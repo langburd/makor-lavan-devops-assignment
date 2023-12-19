@@ -9,23 +9,18 @@ variable "location" {
   default     = "germanywestcentral"
 }
 
-variable "vnet_name" {
-  description = "The name of the virtual network"
+variable "cluster_name" {
+  description = "Name of the AKS cluster to create"
   type        = string
 }
 
-variable "subnet_appgw_id" {
-  description = "The ID of the AppGW subnet"
+variable "ingress_application_gateway_name" {
+  description = "Name of the Application Gateway to create"
   type        = string
 }
-
-# variable "ssl_certificate_name" {
-#   description = "The name of the SSL certificate"
-#   type        = string
-# }
 
 variable "tags" {
-  description = "The tags to apply to the resource group"
+  description = "Tags to apply to all resources"
   type        = map(string)
   default     = {}
 }

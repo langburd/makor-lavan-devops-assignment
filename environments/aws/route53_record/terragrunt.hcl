@@ -10,8 +10,9 @@ include "root" {
 inputs = merge(
   include.root.locals.resource_vars["inputs"],
   {
-    app_name       = dependency.helm.outputs.app_name
-    hosted_zone_id = dependency.route53_zone.outputs.hosted_zone_id
+    app_name          = dependency.helm.outputs.app_name
+    hosted_zone_id    = dependency.route53_zone.outputs.hosted_zone_id
+    public_ip_address = dependency.appgw.outputs.public_ip_address
   },
   {
     tags = merge(
@@ -25,6 +26,7 @@ dependencies {
   paths = [
     "../app",
     "../route53_zone",
+    "../../azure/appgw",
   ]
 }
 
@@ -39,5 +41,12 @@ dependency "helm" {
   config_path = "../app"
   mock_outputs = {
     app_name = "makor-lavan"
+  }
+}
+
+dependency "appgw" {
+  config_path = "../../azure/appgw"
+  mock_outputs = {
+    public_ip_address = "1.2.3.4"
   }
 }
