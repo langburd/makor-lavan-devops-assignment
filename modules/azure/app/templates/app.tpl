@@ -7,10 +7,17 @@ ingress:
   className: azure-application-gateway
   annotations:
     appgw.ingress.kubernetes.io/health-probe-path: "/index.html"
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
-    - paths: # host: ${host_name}
+    - host: ${host_name}
+      paths:
         - path: /
           pathType: Prefix
+  tls:
+    - secretName: ${host_name}-tls
+      hosts:
+        - ${host_name}
 volumes:
   - name: index-html
     configMap:

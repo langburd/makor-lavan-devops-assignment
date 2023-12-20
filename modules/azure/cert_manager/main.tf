@@ -45,49 +45,16 @@ provider "helm" {
   }
 }
 
-resource "kubernetes_manifest" "letsencrypt_prod" {
-  manifest = {
-    apiVersion = "cert-manager.io/v1"
-    kind       = "ClusterIssuer"
-    metadata = {
-      name = "letsencrypt-prod"
-    }
-    spec = {
-      acme = {
-        email  = "mend@langburd.com"
-        server = "https://acme-v02.api.letsencrypt.org/directory"
-        privateKeySecretRef = {
-          name = "letsencrypt-prod"
-        }
-        solvers = [
-          {
-            http01 = {
-              ingress = {
-                class = "azure/application-gateway"
-              }
-            }
-          }
-        ]
-      }
-    }
-  }
-}
-
-# Application
-resource "helm_release" "app" {
-  name             = var.app_name
-  namespace        = var.app_name
+resource "helm_release" "cert_manager" {
+  name             = "cert-manager"
+  repository       = "https://charts.jetstack.io"
+  namespace        = "cert-manager"
   create_namespace = true
-  chart            = abspath("${path.module}/../../../../../../../helm")
-  force_update     = true
-  recreate_pods    = true
-  cleanup_on_fail  = true
+  chart            = "cert-manager"
+  version          = "1.13.3"
   values = [
-    templatefile("${path.module}/templates/app.tpl", {
-      app_environment = var.app_environment
-      app_name        = var.app_name
-      host_name       = "${var.app_name}.${var.hosted_zone_name}"
+    templatefile("${path.module}/templates/cert_manager.tpl", {
+      installCRDs = true
     })
   ]
-  depends_on = [kubernetes_manifest.letsencrypt_prod]
 }

@@ -1,0 +1,4 @@
+---
+tf_source: ../../../modules/azure//cert_manager
+
+inputs:

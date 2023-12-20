@@ -105,12 +105,15 @@ resource "azurerm_application_gateway" "appgw" {
 
   lifecycle {
     ignore_changes = [
-      tags,
       backend_address_pool,
       backend_http_settings,
+      frontend_port,
       http_listener,
       probe,
+      redirect_configuration,
       request_routing_rule,
+      ssl_certificate,
+      tags,
       url_path_map,
     ]
   }
