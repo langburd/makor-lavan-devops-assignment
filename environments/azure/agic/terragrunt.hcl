@@ -11,7 +11,6 @@ inputs = merge(
   include.root.locals.resource_vars["inputs"],
   {
     cluster_name                     = dependency.aks.outputs.cluster_name
-    ingress_application_gateway_id   = dependency.appgw.outputs.ingress_application_gateway_id
     ingress_application_gateway_name = dependency.appgw.outputs.ingress_application_gateway_name
     location                         = include.root.locals.env_vars["location"]
     resource_group_name              = include.root.locals.env_vars["resource_group_name"]
