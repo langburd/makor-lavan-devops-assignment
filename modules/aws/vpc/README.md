@@ -7,7 +7,7 @@ Since the use of private subnets was not required by exam owners, their creation
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.25.0 |
 
 ## Providers
