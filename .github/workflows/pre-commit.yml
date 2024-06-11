@@ -16,33 +16,121 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install prerequisites (shfmt, hadolint, terragrunt, terraform-docs, tflint)
         run: |
-          # Install prerequisites (shfmt, hadolint, terragrunt, terraform-docs, tflint)
+          # Set the directory to install binaries
+          BIN_DIR=/usr/local/bin
 
-          # Install shfmt
-          sudo wget -q -O /usr/local/bin/shfmt $(curl -sL https://api.github.com/repos/mvdan/sh/releases/latest | grep browser_download_url | grep -o -E "https://.+?_linux_amd64")
-          sudo chmod +x /usr/local/bin/shfmt
+          # Function to check the exit code and echo an error message
+          check_exit_code() {
+              local exit_code=$1
+              local error_message=$2
+
+              if [[ ${exit_code} -ne 0 ]]; then
+                  echo "Error: ${error_message}"
+                  return 1
+              fi
+              return 0
+          }
+
+          # Function to download a file
+          download_file() {
+              local name=$2
+              local url=$1
+
+              wget -q -O "${name}" "${url}"
+              check_exit_code $? "downloading from ${url}"
+              return $?
+          }
+
+          # Function to set executable permissions
+          set_executable() {
+              local file=$1
+
+              chmod +x "${file}"
+              check_exit_code $? "setting executable permissions for ${file}"
+              return $?
+          }
+
+          # Function to download and install a binary
+          install_binary() {
+              local name=$1
+              local url=$2
+
+              echo "Installing ${name}..."
+              download_file "${url}" "${BIN_DIR}/${name}"
+              check_exit_code $? "downloading ${name}"
+
+              set_executable "${BIN_DIR}/${name}"
+              check_exit_code $? "setting executable permissions for ${name}"
+
+              echo "${name} installed successfully."
+              return 0
+          }
+
+          # Function to download and extract a tar.gz file
+          install_tar_gz() {
+              local name=$1
+              local url=$2
+
+              echo "Installing ${name}..."
+              download_file "${url}" "${BIN_DIR}/${name}.tar.gz"
+              check_exit_code $? "downloading ${name}"
+
+              tar -xzf "${BIN_DIR}/${name}.tar.gz" -C "${BIN_DIR}"
+              check_exit_code $? "extracting ${name}"
+
+              set_executable "${BIN_DIR}/${name}"
+              check_exit_code $? "setting executable permissions for ${name}"
+
+              echo "${name} installed successfully."
+              return 0
+          }
+
+          # Function to download and extract a zip file
+          install_zip() {
+              local name=$1
+              local url=$2
+
+              echo "Installing ${name}..."
+              download_file "${url}" "${BIN_DIR}/${name}.zip"
+              check_exit_code $? "downloading ${name}"
+
+              unzip -q -o -d "${BIN_DIR}" "${BIN_DIR}/${name}.zip"
+              check_exit_code $? "extracting ${name}"
+
+              set_executable "${BIN_DIR}/${name}"
+              check_exit_code $? "setting executable permissions for ${name}"
+
+              echo "${name} installed successfully."
+              return 0
+          }
+
+          # Ensure unzip is installed
+          if ! command -v unzip &> /dev/null; then
+              echo "unzip could not be found. Installing unzip..."
+              sudo apt-get update && sudo apt-get install -y unzip
+              check_exit_code $? "installing unzip"
+          fi
 
           # Install hadolint
-          sudo wget -q -O /usr/local/bin/hadolint $(curl -sL https://api.github.com/repos/hadolint/hadolint/releases/latest | grep browser_download_url | grep -o -E "https://.+?-Linux-x86_64" | uniq)
-          sudo chmod +x /usr/local/bin/hadolint
+          install_binary "hadolint" "$(curl -sL https://api.github.com/repos/hadolint/hadolint/releases/latest | grep browser_download_url | grep -o -E "https://.+?-Linux-x86_64" | uniq || true)"
 
-          # Install terragrunt
-          sudo wget -q -O /usr/local/bin/terragrunt $(curl -sL https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep browser_download_url | grep -o -E "https://.+?_linux_amd64")
-          sudo chmod +x /usr/local/bin/terragrunt
+          # Install shfmt
+          install_binary "shfmt" "$(curl -sL https://api.github.com/repos/mvdan/sh/releases/latest | grep browser_download_url | grep -o -E "https://.+?_linux_amd64" || true)"
 
           # Install terraform-docs
-          sudo wget -q -O /usr/local/bin/terraform-docs.tar.gz $(curl -sL https://api.github.com/repos/terraform-docs/terraform-docs/releases/latest | grep browser_download_url | grep -o -E "https://.+?-linux-amd64.tar.gz")
-          sudo tar -xzf /usr/local/bin/terraform-docs.tar.gz -C /usr/local/bin
-          sudo chmod +x /usr/local/bin/terraform-docs
+          install_tar_gz "terraform-docs" "$(curl -sL https://api.github.com/repos/terraform-docs/terraform-docs/releases/latest | grep browser_download_url | grep -o -E "https://.+?-linux-amd64.tar.gz" || true)"
+
+          # Install terragrunt
+          install_binary "terragrunt" "$(curl -sL https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep browser_download_url | grep -o -E "https://.+?_linux_amd64" || true)"
 
           # Install tflint
-          sudo wget -q -O /usr/local/bin/tflint.zip $(curl -sL https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep browser_download_url | grep -o -E "https://.+?_linux_amd64.zip")
-          sudo gunzip -f -S .zip /usr/local/bin/tflint.zip
-          sudo chmod +x /usr/local/bin/tflint
+          install_zip "tflint" "$(curl -sL https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep browser_download_url | grep -o -E "https://.+?_linux_amd64.zip" || true)"
+
+          echo "All installations completed."
 
       - name: Run pre-commit action
         uses: pre-commit/action@v3.0.1
