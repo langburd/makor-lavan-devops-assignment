@@ -49,3 +49,6 @@ terragrunt-debug.tfvars.json
 
 secret.yaml
 kubeconfig.yaml
+
+# Temporary folder
+temp/
