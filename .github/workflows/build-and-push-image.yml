@@ -3,9 +3,11 @@ name: build-and-push-image
 
 on:
   push:
-    branches:
-      # - 'master'
+    tags:
       - '*'
+# pull_request:
+#   branches:
+#     - 'master'
 
 env:
   REGISTRY: ghcr.io
