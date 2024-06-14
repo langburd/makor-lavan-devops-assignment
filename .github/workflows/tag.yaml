@@ -48,6 +48,7 @@ jobs:
           else
             echo "Tag ${{ env.chart_version }} does not exist"
             echo "tag_exists=false" >> $GITHUB_ENV
+          fi
 
       - name: Create Git tag
         if: env.changed == 'true' && env.tag_exists == 'false'
