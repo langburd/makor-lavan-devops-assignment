@@ -121,7 +121,7 @@ resource "helm_release" "ingress_azure" {
   namespace       = "kube-system"
   chart           = "ingress-azure"
   repository      = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
-  version         = "1.7.2"
+  version         = "1.7.4"
   wait            = true
   force_update    = true
   recreate_pods   = true
