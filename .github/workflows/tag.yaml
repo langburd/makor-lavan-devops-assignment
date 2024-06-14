@@ -1,0 +1,41 @@
+---
+name: tag-helm-chart-version
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tag-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if Chart.yaml has changed
+        id: check_changes
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q 'helm/Chart.yaml'; then
+            echo "Chart.yaml has changed"
+            echo "changed=true" >> $GITHUB_ENV
+          else
+            echo "Chart.yaml has not changed"
+            echo "changed=false" >> $GITHUB_ENV
+          fi
+
+      - name: Extract version from Chart.yaml
+        if: env.changed == 'true'
+        id: extract_version
+        run: |
+          version=$(grep '^version:' helm/Chart.yaml | awk '{print $2}')
+          echo "chart_version=$version" >> $GITHUB_ENV
+
+      - name: Create Git tag
+        if: env.changed == 'true'
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git tag ${{ env.chart_version }}
+          git push origin ${{ env.chart_version }}
