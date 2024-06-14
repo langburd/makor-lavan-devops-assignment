@@ -38,8 +38,19 @@ jobs:
           version=$(grep '^version:' helm/Chart.yaml | awk '{print $2}')
           echo "chart_version=v${version}" >> $GITHUB_ENV
 
-      - name: Create Git tag
+      - name: Check if tag already exists
         if: env.changed == 'true'
+        id: check_tag
+        run: |
+          if git ls-remote --tags origin | grep -q "refs/tags/${{ env.chart_version }}"; then
+            echo "Tag ${{ env.chart_version }} already exists"
+            echo "tag_exists=true" >> $GITHUB_ENV
+          else
+            echo "Tag ${{ env.chart_version }} does not exist"
+            echo "tag_exists=false" >> $GITHUB_ENV
+
+      - name: Create Git tag
+        if: env.changed == 'true' && env.tag_exists == 'false'
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
@@ -47,7 +58,7 @@ jobs:
           git push origin ${{ env.chart_version }}
 
       - name: Trigger build-and-push-image workflow
-        if: env.changed == 'true'
+        if: env.changed == 'true' && env.tag_exists == 'false'
         run: |
           curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
