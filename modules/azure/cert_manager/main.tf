@@ -51,7 +51,7 @@ resource "helm_release" "cert_manager" {
   namespace        = "cert-manager"
   create_namespace = true
   chart            = "cert-manager"
-  version          = "1.13.3"
+  version          = "v1.15.0"
   values = [
     templatefile("${path.module}/templates/cert_manager.tpl", {
       installCRDs = true
