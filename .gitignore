@@ -52,3 +52,6 @@ kubeconfig.yaml
 
 # Temporary folder
 temp/
+
+# Pytest cache
+.pytest_cache/
