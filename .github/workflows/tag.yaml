@@ -36,7 +36,7 @@ jobs:
         id: extract_version
         run: |
           version=$(grep '^version:' helm/Chart.yaml | awk '{print $2}')
-          echo "chart_version=$version" >> $GITHUB_ENV
+          echo "chart_version=v${version}" >> $GITHUB_ENV
 
       - name: Create Git tag
         if: env.changed == 'true'
