@@ -25,18 +25,18 @@ locals {
 remote_state {
   backend = "s3"
   config = {
-    bucket                   = "mend-playground-avi"
+    bucket                   = "makor-lavan-devops-assignment"
     key                      = "${path_relative_to_include()}/terraform.tfstate"
     region                   = local.common_vars.common["default_region"]
     encrypt                  = true
     skip_bucket_ssencryption = true
-    dynamodb_table           = "mend-playground-avi"
+    dynamodb_table           = "makor-lavan-devops-assignment"
     s3_bucket_tags = {
-      "Department" = "DevOps"
-      // "GitRepository" = "https://github.com/langburd/makor-lavan-devops-assignment"
-      "Owner"     = "Avi Langburd"
-      "Temp"      = "True"
-      "Terraform" = "True"
+      "Department"    = "DevOps"
+      "GitRepository" = "https://github.com/langburd/makor-lavan-devops-assignment"
+      "Owner"         = "Avi Langburd"
+      "Temp"          = "True"
+      "Terraform"     = "True"
     }
   }
   generate = {
