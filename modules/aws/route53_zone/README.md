@@ -1,6 +1,6 @@
 # Terraform module for AWS Route53
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -37,4 +37,4 @@ No modules.
 |------|-------------|
 | <a name="output_hosted_zone_id"></a> [hosted\_zone\_id](#output\_hosted\_zone\_id) | The ID of the hosted zone |
 | <a name="output_name_servers"></a> [name\_servers](#output\_name\_servers) | The name servers of the hosted zone |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
