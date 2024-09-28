@@ -10,5 +10,8 @@
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     }
-  ]
+  ],
+  "pre-commit": {
+    "enabled": true
+  }
 }
