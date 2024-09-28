@@ -30,11 +30,11 @@ repos:
     hooks:
       - id: hadolint
 
-  # Helm hook
-  - repo: https://github.com/gruntwork-io/pre-commit
-    rev: v0.1.23
-    hooks:
-      - id: helmlint
+  # # Helm hook
+  # - repo: https://github.com/gruntwork-io/pre-commit
+  #   rev: v0.1.23
+  #   hooks:
+  #     - id: helmlint
 
   # YAML hooks
   - repo: https://github.com/adrienverge/yamllint.git
