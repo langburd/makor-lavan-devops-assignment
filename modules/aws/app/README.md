@@ -1,6 +1,6 @@
 # Terraform module for Helm releases
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -47,4 +47,4 @@ No modules.
 |------|-------------|
 | <a name="output_app_name"></a> [app\_name](#output\_app\_name) | The name of the app |
 | <a name="output_app_url"></a> [app\_url](#output\_app\_url) | The URL of the app |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

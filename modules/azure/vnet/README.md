@@ -1,4 +1,4 @@
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -40,4 +40,4 @@ No modules.
 | <a name="output_subnet_appgw_id"></a> [subnet\_appgw\_id](#output\_subnet\_appgw\_id) | The ID of the AppGW subnet |
 | <a name="output_subnet_appgw_name"></a> [subnet\_appgw\_name](#output\_subnet\_appgw\_name) | The name of the AppGW subnet |
 | <a name="output_vnet_name"></a> [vnet\_name](#output\_vnet\_name) | The name of the virtual network |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

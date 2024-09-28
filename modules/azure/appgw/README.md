@@ -1,4 +1,4 @@
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -40,4 +40,4 @@ No modules.
 | <a name="output_ingress_application_gateway_id"></a> [ingress\_application\_gateway\_id](#output\_ingress\_application\_gateway\_id) | The ID of the Application Gateway |
 | <a name="output_ingress_application_gateway_name"></a> [ingress\_application\_gateway\_name](#output\_ingress\_application\_gateway\_name) | The name of the Application Gateway |
 | <a name="output_public_ip_address"></a> [public\_ip\_address](#output\_public\_ip\_address) | The public IP address of the Application Gateway |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
