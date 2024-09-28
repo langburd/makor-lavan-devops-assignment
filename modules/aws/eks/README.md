@@ -49,7 +49,7 @@ No modules.
 | <a name="input_cluster_addons"></a> [cluster\_addons](#input\_cluster\_addons) | List of addons to enable for the EKS cluster | `map(map(bool))` | `{}` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the EKS cluster to create | `string` | n/a | yes |
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | Kubernetes version to use for the EKS cluster | `string` | `"1.27"` | no |
-| <a name="input_eks_workers"></a> [eks\_workers](#input\_eks\_workers) | List of managed node groups to create for the EKS cluster | <pre>map(object({<br>    min_size        = number<br>    max_size        = number<br>    desired_size    = number<br>    max_unavailable = number<br>    instance_types  = list(string)<br>    }<br>  ))</pre> | `{}` | no |
+| <a name="input_eks_workers"></a> [eks\_workers](#input\_eks\_workers) | List of managed node groups to create for the EKS cluster | <pre>map(object({<br/>    min_size        = number<br/>    max_size        = number<br/>    desired_size    = number<br/>    max_unavailable = number<br/>    instance_types  = list(string)<br/>    }<br/>  ))</pre> | `{}` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet IDs to place EKS cluster in | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to apply to the EKS | `map(string)` | `{}` | no |
 
